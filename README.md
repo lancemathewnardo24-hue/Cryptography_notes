@@ -1,4 +1,4 @@
-# Cryptography Notes – BSIT Cybersecurity
+# Cryptography Notes – Cybersecurity
 
 This repository contains my notes and code for Cryptography,
 based on CryptoPals Challenge Set 1.
