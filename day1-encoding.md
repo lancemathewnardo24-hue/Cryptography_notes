@@ -43,3 +43,40 @@ Hexadecimal is a base-16 encoding system used to represent binary data.
 - Commonly used to display binary data in readable form
 
 ### Example
+48656c6c6f
+Decoded result: Hello
+
+
+Base64 is **not encryption**.
+
+---
+
+## Encoding vs Encryption vs Hashing
+
+| Type | Purpose | Reversible | Examples |
+|----|----|----|----|
+| Encoding | Data representation | Yes | Hex, Base64 |
+| Encryption | Data protection | Yes (with key) | XOR, AES |
+| Hashing | Data integrity | No | MD5, SHA-256 |
+
+---
+
+## CryptoPals Rule (Important)
+> Always operate on raw bytes, never on encoded strings.  
+> Only use hex and base64 for pretty-printing.
+
+### Meaning
+- Hex and Base64 are only representations
+- Cryptographic operations must be performed on raw byte data
+- Incorrect handling of encodings can cause bugs and security issues
+
+---
+
+## Practical Exercise: Hex to Base64
+
+### Task
+Convert the following hex string into Base64:
+49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d
+
+### Expected Output
+SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
