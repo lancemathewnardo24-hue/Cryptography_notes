@@ -10,7 +10,7 @@ Convert the following hex string into Base64:
 SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
 
 ### Conversion Python Code
-[Open Hex To Base 64 Conversion crypto Program](Codes/HexToBase64.py)
+[Open Hex To Base 64 Conversion crypto Program](Day1-3/Codes/HexToBase64.py)
 
 ## **2nd Challenge: Convert hex to base64**
 
@@ -27,4 +27,4 @@ Write a function that takes two equal-length buffers and produces their XOR comb
 746865206b696420646f6e277420706c6179
 
 ### XOR Code
-[Open Function XOR](Codes/Xor.py)
+[Open Function XOR](Day1-3/Codes/Xor.py)
