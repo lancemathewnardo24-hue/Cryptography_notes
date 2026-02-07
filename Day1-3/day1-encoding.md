@@ -71,8 +71,9 @@ Base64 is **not encryption**.
 - Incorrect handling of encodings can cause bugs and security issues
 
 ---
+# Crypto Challenge Set 1
 
-## Practical Exercise: Hex to Base64
+## **1st Challenge: Convert hex to base64**
 
 ### Task
 Convert the following hex string into Base64:
