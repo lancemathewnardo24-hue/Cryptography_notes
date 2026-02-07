@@ -61,13 +61,4 @@ Base64 is **not encryption**.
 
 ---
 
-## CryptoPals Rule (Important)
-> Always operate on raw bytes, never on encoded strings.  
-> Only use hex and base64 for pretty-printing.
 
-### Meaning
-- Hex and Base64 are only representations
-- Cryptographic operations must be performed on raw byte data
-- Incorrect handling of encodings can cause bugs and security issues
-
----
