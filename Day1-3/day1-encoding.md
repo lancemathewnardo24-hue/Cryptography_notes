@@ -98,3 +98,4 @@ Write a function that takes two equal-length buffers and produces their XOR comb
 
 ### should produce:
 746865206b696420646f6e277420706c6179
+[Open Function XOR](Codes/Xor.py)
