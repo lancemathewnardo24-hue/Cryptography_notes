@@ -1,19 +1,17 @@
-import base64
+def fixed_xor(hex1, hex2):
+   
+    # decde hex int bytes
+    b1 = bytes.fromhex(hex1)
+    b2 = bytes.fromhex(hex2)
+   
+    # check lengths
+    if len(b1) != len(b2):
+        raise ValueError("Inputs must be the same length")
+    
+    # XOR each byte and return hex string
+    return bytes(x ^ y for x, y in zip(b1, b2)).hex()
 
-# Ask the user for hex input
-hex_string = input("Enter hex string: ")
-
-# Convert hex to raw bytes
-try:
-    raw_bytes = bytes.fromhex(hex_string)
-except ValueError:
-    print("Invalid hex input!")
-    exit()
-
-# Convert raw bytes to Base64
-base64_bytes = base64.b64encode(raw_bytes)
-
-# Convert bytes to string for printing
-base64_string = base64_bytes.decode()
-
-print("Base64 output:", base64_string)
+# Ask the user for two hex strings and print the XOR result
+hex1 = input("Enter first hex string: ").strip()
+hex2 = input("Enter second hex string: ").strip()
+print("XOR result:", fixed_xor(hex1, hex2))
