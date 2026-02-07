@@ -10,7 +10,7 @@ Convert the following hex string into Base64:
 SSdtIGtpbGxpbmcgeW91ciBicmFpbiBsaWtlIGEgcG9pc29ub3VzIG11c2hyb29t
 
 ### Conversion Python Code
-[Open Hex To Base 64 Conversion crypto Program](Day1-3/Codes/HexToBase64.py)
+[Open Base 64 Conversion crypto Program](Day1-3/Codes/HexToBase64.py)
 
 ## **2nd Challenge: Convert hex to base64**
 
