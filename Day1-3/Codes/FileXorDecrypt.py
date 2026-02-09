@@ -1,4 +1,4 @@
-# Detect single-character XOR encrypted string in a file
+import os
 
 ENGLISH_FREQ = {
     'a': 0.065, 'b': 0.012, 'c': 0.022, 'd': 0.032,
@@ -16,16 +16,33 @@ def score_english(text):
 def single_byte_xor(data, key):
     return bytes(b ^ key for b in data)
 
+# Track best result
 best_score = 0
 best_result = None
 best_key = None
 best_line = None
 
+# Get directory where THIS script lives
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Ask for filename (Data.txt)
 filename = input("Enter filename: ").strip()
 
-with open(filename, "r") as file:
+# If user forgets .txt, add it
+if not filename.endswith(".txt"):
+    filename += ".txt"
+
+# Build full path (Data.txt is one folder ABOVE Codes)
+file_path = os.path.join(BASE_DIR, "..", filename)
+
+# Debug info (you can remove later)
+print("Opening:", file_path)
+
+# Open file safely
+with open(file_path, "r") as file:
     for line in file:
         line = line.strip()
+
         try:
             cipher_bytes = bytes.fromhex(line)
         except ValueError:
@@ -33,6 +50,7 @@ with open(filename, "r") as file:
 
         for key in range(256):
             decrypted = single_byte_xor(cipher_bytes, key)
+
             try:
                 text = decrypted.decode("ascii")
             except UnicodeDecodeError:
@@ -46,6 +64,7 @@ with open(filename, "r") as file:
                 best_key = key
                 best_line = line
 
+# Output result
 print("\n🔥 Single-byte XOR detected!")
 print("Encrypted hex:", best_line)
 print("Key:", chr(best_key), f"(decimal {best_key})")
