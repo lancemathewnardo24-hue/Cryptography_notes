@@ -1,0 +1,19 @@
+Curious Questions (might forget to ask, so i'm saving this here)
+
+1. Ask regarding the School ID 
+    My cousin had an idea of normalizing Digital Business cards that you would just tap with your phone,
+    which involved rfids' and he developed a site that would display the owners' Information and contacts
+    (fb, insta, etc.) including a featured feature that would allow you to display images, videos, in the
+    front.
+    
+    Then as i tried his cards which I would tap with my phone using NYC, I got reminded by everytime I
+    tap my id as i enter the school, so out of curiousity I tapped it with my phone and it was detected
+    as an access card. So I have a digital copy of my ID, as i tried to tap my id with my phone it actually
+    worked!, My face was displayed on the screen in the monitor at the gate. Then after that I wanted to
+    know what was written inside my ID, then I downloaded NYC tools from my phone and tired to access it.
+    but it was gibberish letters like "1cofja23noajfa" something like that if i remember. But now as I 
+    was studying cryptography, I felt that this stuff is familiar, and there I realized that the gibberish
+    letters miht have been an ecrpytion.
+
+    is it possible for me to decrpyt that? and if I ever do what would I gain?
+2. 

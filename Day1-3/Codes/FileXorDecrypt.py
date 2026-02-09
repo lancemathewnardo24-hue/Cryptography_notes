@@ -32,8 +32,8 @@ filename = input("Enter filename: ").strip()
 if not filename.endswith(".txt"):
     filename += ".txt"
 
-# Build full path (Data.txt is one folder ABOVE Codes)
-file_path = os.path.join(BASE_DIR, "..", filename)
+# Build full path
+file_path = os.path.join(BASE_DIR, filename)
 
 # Debug info (you can remove later)
 print("Opening:", file_path)
@@ -65,7 +65,7 @@ with open(file_path, "r") as file:
                 best_line = line
 
 # Output result
-print("\n🔥 Single-byte XOR detected!")
+print("\nSingle-byte XOR found")
 print("Encrypted hex:", best_line)
 print("Key:", chr(best_key), f"(decimal {best_key})")
 print("Decrypted message:")
