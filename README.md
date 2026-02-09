@@ -8,6 +8,9 @@ based on The Roadmap Set
 - [Day 2](Day1-3/day2-xorEncryption.md): XOR Encryption
 - [Day 3](): Repeating-key XOR
 
+## CryptoPals Challenges w/ Code made
+[Go To Challenges](CryptoPals-Challenges.md)
+
 ## Tools Used
 - Python 3
 - CyberChef
