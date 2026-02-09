@@ -53,8 +53,8 @@ How? Devise some method for "scoring" a piece of English plaintext. Character fr
 Achievement Unlocked
 You now have our permission to make "ETAOIN SHRDLU" jokes on Twitter.
 
-### SingleByteDecryptor Code
-[Open Single Byte Decryptor](Day1-3/Codes/03_SingleByteDecryptXor.py)
+### Single Byte Decryptor Code
+[Open SingleByteDecryptor](Day1-3/Codes/03_SingleByteDecryptXor.py)
 
 ## **4th Challenge: Detect single-character XOR**
 
@@ -62,7 +62,7 @@ One of the 60-character strings in [this file](Day1-3/Codes/Data.txt) has been e
 
 Find it.
 
->(Your code from [#3](Day1-3/Codes/03_SingleByteDecryptXor.py) should help.)
+>Your code from [#3](Day1-3/Codes/03_SingleByteDecryptXor.py) should help.
 
 ### File Decryptor XOR Code
 [Open FIle FileDecryptorXOR](Day1-3/Codes/04_FileXorDecrypt.py)
