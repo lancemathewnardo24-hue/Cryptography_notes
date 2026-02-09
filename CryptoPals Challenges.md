@@ -38,3 +38,25 @@ Write a function that takes two equal-length buffers and produces their XOR comb
 
 ### XOR Code
 [Open Function XOR](Day1-3/Codes/Xor.py)
+
+## **3rd Challenge: Single Byte XOR cipher**
+
+The hex encoded string:
+
+1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736
+... has been XOR'd against a single character. Find the key, decrypt the message.
+
+You can do this by hand. But don't: write code to do it for you.
+
+How? Devise some method for "scoring" a piece of English plaintext. Character frequency is a good metric. Evaluate each output and choose the one with the best score.
+
+Achievement Unlocked
+You now have our permission to make "ETAOIN SHRDLU" jokes on Twitter.
+
+## **4th Challenge: Detect single-character XOR**
+
+One of the 60-character strings in [this file](Day1-3/Codes/Data.txt) has been encrypted by single-character XOR.
+
+Find it.
+
+>(Your code from [#3](Day1-3/Codes/03_SingleByteDecryptXor.py) should help.)
