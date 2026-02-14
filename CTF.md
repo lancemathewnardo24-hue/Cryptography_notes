@@ -1,43 +1,187 @@
+# CPT Recap – ValenFind LFI to Admin API
 
+## Overview
 
-We are given a site url, when opened it gives us a site ValenFind, letting us log in and we see diferent users.
+This challenge involves exploiting a **Local File Inclusion (LFI)** vulnerability in the *ValenFind* web application to obtain sensitive configuration data, which is then used to access a protected **admin API endpoint** and extract the database.
 
-One user named cupid has a description not like anyother speaking of data base. then we open our burp to intercept the proxy in the site.
+---
 
-as we forward the cupid site and check the history, we find a response. scrolling down we find a //vunrability stating that layout 'parameter' allows LFI
+## 1. Initial Reconnaissance
 
+* We are given a **site URL**.
+* Opening the site reveals an application called **ValenFind**.
+* The site allows users to **log in** and view different user profiles.
 
+### Notable Finding
 
-Then we change the layout of the profile cupid then turning on intercept again then putting it to the repeater
+* One user named **`cupid`** stands out.
+* The profile description contains unusual text referencing **databases**, unlike other users.
+* This suggests the profile may be important or vulnerable.
 
-using the xyz = /../../etc/passwd  which is the Local File Inclusion
+---
 
-we use this LFI to change the layout=theme_modern.html to layout=/../../etc/passwd
+## 2. Traffic Interception with Burp Suite
 
-this will give us an error ther is not fiel ....../../../etc/passwd and before that we are given a directory.
+* We open **Burp Suite** and enable the **Proxy (Intercept ON)**.
+* We navigate to Cupid’s profile and forward the request.
+* In **Proxy → HTTP history**, we inspect the server responses.
 
+### Key Discovery
+
+* While scrolling through a response, we find a comment indicating a **vulnerability**:
+
+  > The `layout` parameter allows **Local File Inclusion (LFI)**
+
+This confirms that user-controlled input is being used to load files on the server.
+
+---
+
+## 3. Exploiting the LFI Vulnerability
+
+### Normal Behavior
+
+* The profile page uses a parameter similar to:
+
+```
+layout=theme_modern.html
+```
+
+### Malicious Payload
+
+* We modify the `layout` parameter to attempt LFI:
+
+```
+layout=/../../etc/passwd
+```
+
+* We send the modified request to **Repeater** for easier testing.
+
+### Server Response
+
+* The server returns an error indicating the file could not be found.
+* However, the error message **leaks the full file path**:
+
+```
 /opt/Valenfind/templates/components/app.py
+```
 
-as we take down each folder from the right we are directed to a file in 
+This is extremely valuable information.
 
+---
+
+## 4. Path Traversal to Application Source Code
+
+* Using the leaked path, we progressively remove directories from the right:
+
+```
+/opt/Valenfind/templates/components/app.py
 /opt/Valenfind/app.py
+```
 
-after sending we see the master key of the ADMIN_API_KEY = "CUPID_MASTER_KEY_XOXO", we save this for later. then below we see the data base file. knowing that it exists here
+* We then request:
 
-we try to find the data base directory by scrolling down
+```
+layout=/../../app.py
+```
 
-we find /api/admin/export_db
+### Result
 
-then we try to acces it but below we see a command that **if auth_header == Authenticaiton_key**, so we already have the key from earlier "CUPID_MASTER_KEY_XOXO"
+* The request succeeds and reveals the contents of **app.py**.
 
-now to find the auth_header, which we see above this command. **X-Valentine-Token**
+---
 
-so what we will encode to the request will be 
+## 5. Sensitive Data Disclosure
 
+Inside `app.py`, we find critical information:
+
+```python
+ADMIN_API_KEY = "CUPID_MASTER_KEY_XOXO"
+```
+
+* This is clearly an **administrator API key**.
+* We save this key for later use.
+
+### Additional Observation
+
+* Scrolling further shows references to the **database** and admin-related routes.
+
+---
+
+## 6. Discovering the Admin API Endpoint
+
+* While reviewing the source code, we find the endpoint:
+
+```
+/api/admin/export_db
+```
+
+* Attempting to access it directly fails due to missing authentication.
+
+---
+
+## 7. Understanding the Authentication Mechanism
+
+From the source code:
+
+```python
+if auth_header == AUTHENTICATION_KEY:
+```
+
+* The application checks for a specific **HTTP header**.
+* Above this logic, the required header name is defined as:
+
+```
+X-Valentine-Token
+```
+
+---
+
+## 8. Authorized Database Export
+
+Using the information gathered:
+
+### Request Format
+
+```
 GET /api/admin/export_db
+X-Valentine-Token: CUPID_MASTER_KEY_XOXO
+```
 
-X-Valentine-Token:CUPID_MASTER_KEY_XOXO
+* We send this request using **Burp Repeater**.
 
-after sending we find our key
+### Result
 
-so we also find the 
+* The server accepts the request.
+* The **database is successfully exported**, revealing the final key / flag.
+
+---
+
+## 9. Attack Chain Summary
+
+1. Reconnaissance reveals a suspicious user (Cupid)
+2. Burp Suite interception exposes an LFI vulnerability
+3. LFI leaks internal file paths
+4. Path traversal allows reading `app.py`
+5. Admin API key is extracted
+6. Admin endpoint is discovered
+7. Custom authentication header is identified
+8. Database export is successfully accessed
+
+---
+
+## Key Concepts Used
+
+* Local File Inclusion (LFI)
+* Path Traversal
+* Source Code Disclosure
+* API Key Extraction
+* Custom HTTP Header Authentication
+
+---
+
+## Lessons Learned
+
+* Error messages can leak critical internal paths
+* LFI vulnerabilities often lead to full application compromise
+* Hardcoded secrets in source code are extremely dangerous
+* Defense-in-depth is essential for admin APIs
