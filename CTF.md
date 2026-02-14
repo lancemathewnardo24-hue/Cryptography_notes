@@ -21,3 +21,23 @@ this will give us an error ther is not fiel ....../../../etc/passwd and before t
 as we take down each folder from the right we are directed to a file in 
 
 /opt/Valenfind/app.py
+
+after sending we see the master key of the ADMIN_API_KEY = "CUPID_MASTER_KEY_XOXO", we save this for later. then below we see the data base file. knowing that it exists here
+
+we try to find the data base directory by scrolling down
+
+we find /api/admin/export_db
+
+then we try to acces it but below we see a command that **if auth_header == Authenticaiton_key**, so we already have the key from earlier "CUPID_MASTER_KEY_XOXO"
+
+now to find the auth_header, which we see above this command. **X-Valentine-Token**
+
+so what we will encode to the request will be 
+
+GET /api/admin/export_db
+
+X-Valentine-Token:CUPID_MASTER_KEY_XOXO
+
+after sending we find our key
+
+so we also find the 
